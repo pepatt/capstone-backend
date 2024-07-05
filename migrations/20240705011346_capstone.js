@@ -13,6 +13,16 @@ export function up(knex) {
         .timestamp("updated_at")  
         .defaultTo(knex.raw("CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"));
     })
+    .createTable("weather", (table) => {
+      table.increments("id").primary();
+      table.string("description").notNullable();
+      table.float("temperature").notNullable();
+      table.float("UVI").notNullable();
+      table.timestamp("created_at").defaultTo(knex.fn.now());
+      table
+        .timestamp("updated_at")  
+        .defaultTo(knex.raw("CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"));
+    })
 }
 
 /**
@@ -20,5 +30,5 @@ export function up(knex) {
  * @returns { Promise<void> }
  */
 export function down(knex) {
-  return knex.schema.dropTable("users");
+  return knex.schema.dropTable("weather").dropTable("users");
 }
