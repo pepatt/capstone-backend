@@ -18,6 +18,9 @@ export function up(knex) {
       table.string("description").notNullable();
       table.float("temperature").notNullable();
       table.float("UVI").notNullable();
+      table.string("country").notNullable();
+      table.string("city").notNullable();
+      table.boolean("isApplied").defaultTo("false").notNullable; 
       table.timestamp("created_at").defaultTo(knex.fn.now());
       table
         .timestamp("updated_at")  
