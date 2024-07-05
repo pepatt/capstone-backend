@@ -1,10 +1,15 @@
 import express from 'express';
+import initKnex from 'knex';
+import configuration from '../knexfile.js';
+const knex = initKnex(configuration);
 
 const router = express.Router();
 
 
-router.get("/", (req, res) => {
-    res.send("testing router");
+router.get("/", async (req, res) => {
+    const usersData = await knex("users");
+
+    res.send(usersData);
 })
 
 
