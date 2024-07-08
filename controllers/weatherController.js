@@ -4,7 +4,6 @@ const knex = initKnex(configurations);
 import axios from 'axios';
 
 import dotenv from 'dotenv';
-import weather from '../seed-data/weather.js';
 dotenv.config(); 
 
 const index = async (req, res) => {
