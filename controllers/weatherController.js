@@ -22,7 +22,10 @@ const notApplied = async (req, res) => {
             temperature: weatherResp.data.main.temp,
             UVI: UVResp.data.now.uvi,
             country: weatherResp.data.sys.country,
-            city: weatherResp.data.name
+            city: weatherResp.data.name,
+            created_at_day: req.body.created_at_day,
+            created_at_month: req.body.created_at_month,
+            created_at_year: req.body.created_at_year
         })
 
         const returnData = await knex.select("*").from("weather").where({"id": insertResp[0]});
@@ -45,7 +48,10 @@ const applied = async (req, res) => {
             UVI: UVResp.data.now.uvi,
             country: weatherResp.data.sys.country,
             city: weatherResp.data.name,
-            isApplied: true
+            isApplied: true,
+            created_at_day: req.body.created_at_day,
+            created_at_month: req.body.created_at_month,
+            created_at_year: req.body.created_at_year
         })
 
         const returnData = await knex.select("*").from("weather").where({"id": insertResp[0]});
