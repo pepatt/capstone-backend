@@ -9,9 +9,6 @@ export function up(knex) {
       table.string("name").notNullable();
       table.string("email").notNullable();
       table.timestamp("created_at").defaultTo(knex.fn.now());
-      table
-        .timestamp("updated_at")  
-        .defaultTo(knex.raw("CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"));
     })
     .createTable("weather", (table) => {
       table.increments("id").primary();
@@ -21,10 +18,9 @@ export function up(knex) {
       table.string("country").notNullable();
       table.string("city").notNullable();
       table.boolean("isApplied").defaultTo("false").notNullable; 
-      table.timestamp("created_at").defaultTo(knex.fn.now());
-      table
-        .timestamp("updated_at")  
-        .defaultTo(knex.raw("CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"));
+      table.integer('created_at_day').notNullable();
+      table.integer('created_at_month').notNullable();
+      table.integer('created_at_year').notNullable();
     })
 }
 
