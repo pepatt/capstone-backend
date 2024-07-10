@@ -61,9 +61,36 @@ const applied = async (req, res) => {
         res.status(401).send(`Error occurred: ${err}`)
     }
 }
+//in is day month year 
+//out object with weather and a applied === 1 or 0
+const dateAndActivityDependent = async (req, res) => {
+    try {
+        let usersData = await knex("weather")
+        .select('*')
+        .where({
+            created_at_month: req.body.month,
+            created_at_year: req.body.year,
+            isApplied: 1
+        });
+        if (usersData.length === 0) {
+            usersData = await knex("weather")
+            .select('*')
+            .where({
+                created_at_day: req.body.day,
+                created_at_month: req.body.month,
+                created_at_year: req.body.year,
+                isApplied: 0
+            });
+        }
+        res.send(usersData);
+    } catch (err) {
+        res.status(401).send(`Error occurred (likely day doesn't exist): ${err}`)
+    }
+}
 
 export {
     index,
     notApplied,
-    applied
+    applied, 
+    dateAndActivityDependent
 }
