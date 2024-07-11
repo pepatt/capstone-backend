@@ -7,6 +7,6 @@ router.route("/dataDependant").post(weatherController.activeDates);
 router.route("/dateDependantWeather").post(weatherController.weatherDates);
 router.route("/notApplied").post(weatherController.notApplied);
 router.route("/applied").post(weatherController.applied);
-
+router.route("/dataDependantDelete").post(weatherController.activeDatesDelete);
 
 export default router;

@@ -78,6 +78,22 @@ const activeDates = async (req, res) => {
     }
 }
 
+const activeDatesDelete = async (req, res) => {
+    try {
+        await knex("weather")
+        .where({
+            created_at_day: req.body.day,
+            created_at_month: req.body.month,
+            created_at_year: req.body.year,
+            isApplied: 1
+        })
+        .del();
+        res.send("deleted successfully");
+    } catch (err) {
+        res.status(401).send(`Error occurred (likely day doesn't exist): ${err}`)
+    }
+}
+
 const weatherDates = async (req, res) => {
     try {
         let usersData = await knex("weather")
@@ -98,5 +114,6 @@ export {
     notApplied,
     applied, 
     activeDates,
+    activeDatesDelete, 
     weatherDates
 }
